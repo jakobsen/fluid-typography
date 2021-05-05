@@ -262,8 +262,6 @@ const VisuallyHidden = styled.span`
   border: 0;
 `;
 
-const Selector = styled.span``;
-
 const Property = styled.span`
   color: hsl(320deg 100% 35%);
 `;

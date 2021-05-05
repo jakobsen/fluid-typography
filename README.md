@@ -1,7 +1,7 @@
 # Fluid typography
 
-<p align="center>
-  <img src="/public/logo512.png">
+<p align="center">
+  <img src="/public/logo192.png">
 </p>
 
 Calculate the `clamp()` rule for scaling typography to your desired specifications.

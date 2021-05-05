@@ -1,6 +1,53 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+@font-face {
+    font-family: 'silkabold';
+    src: url('/fonts/silka-bold-webfont.eot');
+    src: url('/fonts/silka-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/silka-bold-webfont.woff2') format('woff2'),
+         url('/fonts/silka-bold-webfont.woff') format('woff'),
+         url('/fonts/silka-bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'silkaregular';
+    src: url('/fonts/silka-regular-webfont.eot');
+    src: url('/fonts/silka-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/silka-regular-webfont.woff2') format('woff2'),
+         url('/fonts/silka-regular-webfont.woff') format('woff'),
+         url('/fonts/silka-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'silka_monoregular';
+    src: url('/fonts/silkamono-regular-webfont.eot');
+    src: url('/fonts/silkamono-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/silkamono-regular-webfont.woff2') format('woff2'),
+         url('/fonts/silkamono-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'silka_monosemibold';
+    src: url('/fonts/silkamono-semibold-webfont.eot');
+    src: url('/fonts/silkamono-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/silkamono-semibold-webfont.woff2') format('woff2'),
+         url('/fonts/silkamono-semibold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* CSS RESET */
 /* Box sizing rules */
 *,
 *::before,
@@ -81,15 +128,19 @@ select {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif; 
+  font-family: 'silkaregular', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'silkabold';
 }
 
 pre {
-  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
+  font-family: 'silka_monosemibold', Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
 }
 
 code {
-  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
+  font-family: 'silka_monoregular', Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
 }
 
 #root {
@@ -101,4 +152,9 @@ code {
 html, body {
   height: 100%;
 }
+
+
+
+
+
 `;

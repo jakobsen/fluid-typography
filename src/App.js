@@ -123,7 +123,7 @@ function App() {
             <WarningIcon>
               <AlertCircle size={24} />
             </WarningIcon>
-            The number in fron of the <code>rem</code> portion of the CSS rule
+            The number in front of the <code>rem</code> portion of the CSS rule
             should not be between -1 and 1. This makes it hard to zoom in on the
             text (try it), which reduces accessibility for visually impaired people.
           </Warning>

@@ -157,6 +157,7 @@ const Wrapper = styled.div`
 
 const Grid = styled.div`
   margin: 0 auto;
+  gap: 8px;
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;

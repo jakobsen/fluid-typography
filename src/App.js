@@ -116,9 +116,13 @@ function App() {
       </Wrapper>
       <Pusher />
       <Footer>
-        <Link href="https://github.com/jakobsen">
+        <ButtonLink
+          href="https://github.com/jakobsen/fluid-typography"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <GitHub />
-        </Link>
+        </ButtonLink>
       </Footer>
     </>
   );
@@ -276,11 +280,19 @@ const Footer = styled.footer`
   padding: 20px;
 `;
 
-const Link = styled.a`
+const ButtonLink = styled.a`
   color: hsl(200deg 5% 40%);
 
   &:hover {
     color: hsl(0deg 0% 0%);
+  }
+`;
+
+const Link = styled.a`
+  color: hsl(199.9deg 91.4% 36.3%);
+
+  &:hover {
+    font-family: 'silkabold';
   }
 `;
 

@@ -75,15 +75,11 @@ function App() {
           <h2>Minimum size</h2>
           <p>
             <Input
-              type="number"
-              step="0.05"
               value={minSize}
               onChange={(e) => setMinSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{" "}
             <Input
-              type="number"
-              step="1"
               value={minWidth}
               onChange={(e) => setMinWidth(e.target.value)}
             />
@@ -92,15 +88,11 @@ function App() {
           <h2>Maximum size</h2>
           <p>
             <Input
-              type="number"
-              step="0.1"
               value={maxSize}
               onChange={(e) => setMaxSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{" "}
             <Input
-              type="number"
-              step="1"
               value={maxWidth}
               onChange={(e) => setMaxWidth(e.target.value)}
             />
@@ -184,7 +176,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: baseline;
-  max-width: 650px;
+  max-width: 550px;
   & h2 {
     text-align: left;
   }
@@ -227,7 +219,7 @@ const ExampleText = styled.textarea`
 
 const Input = styled.input`
   font-size: 1rem;
-  width: 4.5rem;
+  width: 3.5rem;
   text-align: center;
   display: inline-block;
   border: none;

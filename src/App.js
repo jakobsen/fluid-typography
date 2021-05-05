@@ -65,22 +65,26 @@ function App() {
             <Input
               value={minSize}
               onChange={(e) => setMinSize(e.target.value)}
-            /><code>rem</code> at a viewport width of{" "}
+            />
+            <code>rem</code> at a viewport width of{" "}
             <Input
               value={minWidth}
               onChange={(e) => setMinWidth(e.target.value)}
-            /><code>px</code>.
+            />
+            <code>px</code>.
           </p>
           <h2>Maximum size</h2>
           <p>
             <Input
               value={maxSize}
               onChange={(e) => setMaxSize(e.target.value)}
-            /><code>rem</code> at a viewport width of{" "}
+            />
+            <code>rem</code> at a viewport width of{" "}
             <Input
               value={maxWidth}
               onChange={(e) => setMaxWidth(e.target.value)}
-            /><code>px</code>.
+            />
+            <code>px</code>.
           </p>
         </Grid>
         <Code>
@@ -122,18 +126,22 @@ function App() {
 
 const Heading = styled.h1`
   font-size: clamp(2.5rem, 3.2vw + 2rem, 4rem);
+  font-family: "silkabold";
   text-align: center;
   margin: 32px;
   line-height: 1.2;
+  background-size: 100%;
   background: rgb(2, 0, 36);
-  background: linear-gradient(
+  background-image: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(9, 9, 121, 1) 57%,
     rgba(0, 212, 255, 1) 100%
   );
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
 `;
 
 const Wrapper = styled.div`
@@ -184,21 +192,22 @@ const ExampleText = styled.textarea`
   appearance: none;
   border: none;
   font-size: var(--computed-clamp);
-  font-family: inherit;
+  font-family: "silkabold";
   font-weight: bold;
   resize: none;
 `;
 
 const Input = styled.input`
-  font-size: 1.2rem;
-  width: calc(1.2 * 3rem);
+  font-size: 1rem;
+  width: 3.5rem;
   text-align: center;
   display: inline-block;
   border: none;
   background-color: hsl(180deg 10% 93%);
+  font-family: "silka_monoregular";
 
   &:focus {
-    font-weight: 700;
+    font-family: "silka_monosemibold";
   }
 
   font-size: clamp(1rem, x, 5rem);
@@ -209,7 +218,7 @@ const Code = styled.pre`
   display: block;
   max-width: 600px;
   margin: 0 auto;
-  padding: 16px 8px;
+  padding: 16px 12px;
   border-radius: 8px;
   background-color: hsl(180deg 10% 93%);
   font-size: 1rem;

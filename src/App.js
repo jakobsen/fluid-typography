@@ -138,6 +138,7 @@ function App() {
 
 const Heading = styled.h1`
   font-size: clamp(2.5rem, 3.2vw + 2rem, 4rem);
+  min-height: 0vh;
   font-family: "silkabold";
   text-align: center;
   margin: 32px;
@@ -205,6 +206,7 @@ const ExampleText = styled.textarea`
   appearance: none;
   border: none;
   font-size: var(--computed-clamp);
+  min-height: 0vh;
   font-family: "silkabold";
   font-weight: bold;
   resize: none;

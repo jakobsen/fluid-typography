@@ -62,7 +62,11 @@ function App() {
         <Blurb>
           Create text that scales with the window size, so that your headings
           look great on any screen. This technique is taken from the{" "}
-          <Link href="https://css-for-js.dev/">
+          <Link
+            href="https://css-for-js.dev/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             wonderful CSS course by Josh Comeau
           </Link>
           .
@@ -71,11 +75,15 @@ function App() {
           <h2>Minimum size</h2>
           <p>
             <Input
+              type="number"
+              step="0.05"
               value={minSize}
               onChange={(e) => setMinSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{" "}
             <Input
+              type="number"
+              step="1"
               value={minWidth}
               onChange={(e) => setMinWidth(e.target.value)}
             />
@@ -84,11 +92,15 @@ function App() {
           <h2>Maximum size</h2>
           <p>
             <Input
+              type="number"
+              step="0.1"
               value={maxSize}
               onChange={(e) => setMaxSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{" "}
             <Input
+              type="number"
+              step="1"
               value={maxWidth}
               onChange={(e) => setMaxWidth(e.target.value)}
             />
@@ -124,6 +136,7 @@ function App() {
       </Wrapper>
       <Pusher />
       <Footer>
+        <VisuallyHidden>See the source code on GitHub.</VisuallyHidden>
         <ButtonLink
           href="https://github.com/jakobsen/fluid-typography"
           rel="noopener noreferrer"
@@ -171,7 +184,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: baseline;
-  max-width: 550px;
+  max-width: 650px;
   & h2 {
     text-align: left;
   }
@@ -214,7 +227,7 @@ const ExampleText = styled.textarea`
 
 const Input = styled.input`
   font-size: 1rem;
-  width: 3.5rem;
+  width: 4.5rem;
   text-align: center;
   display: inline-block;
   border: none;

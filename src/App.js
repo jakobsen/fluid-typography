@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import useWindowDimensions from "./useWindowDimensions";
-import { GitHub, Clipboard } from "react-feather";
+import { GitHub, Clipboard, AlertCircle } from "react-feather";
 
 function oneDecimal(x) {
   return Math.round(10 * x) / 10;
@@ -117,6 +117,17 @@ function App() {
             </CopyButton>
           </Tippy>
         </Code>
+        {Math.abs(remCoefficient) < 1 && (
+          <Warning>
+            <VisuallyHidden>Warning</VisuallyHidden>
+            <WarningIcon>
+              <AlertCircle size={24} />
+            </WarningIcon>
+            The number in fron of the <code>rem</code> portion of the CSS rule
+            should not be between -1 and 1. This makes it hard to zoom in on the
+            text (try it), which reduces accessibility for visually impaired people.
+          </Warning>
+        )}
         <ExampleText
           rows={3}
           value={exampleText}
@@ -264,6 +275,38 @@ const CopyButton = styled.button`
   &:hover {
     color: hsl(0deg 0% 0%);
   }
+`;
+
+const Warning = styled.div`
+  font-size: 1.125rem;
+  border-radius: 8px;
+  border: 2px solid;
+  padding: 8px;
+  width: min(530px, 100%);
+  margin: 0 auto;
+  color: hsl(0deg 100% 40%);
+  position: relative;
+
+  & code {
+    background-color: hsl(0deg 100% 95%);
+    border-radius: 1px;
+    display: inline-block;
+    padding: 1px 5px;
+    margin: -1px -4px;
+  }
+`;
+
+const WarningIcon = styled.div`
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  background-color: hsl(0deg 0% 100%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 `;
 
 const VisuallyHidden = styled.span`

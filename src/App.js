@@ -41,7 +41,15 @@ function App() {
         remCoefficient >= 0 ? "+" : "-"
       } ${Math.abs(remCoefficient)}rem\n  ${maxSize}rem\n)`
     );
-  }, [maxSize, minSize, maxWidth, minWidth, vwCoefficient, remCoefficient]);
+  }, [
+    maxSize,
+    minSize,
+    maxWidth,
+    minWidth,
+    vwCoefficient,
+    remCoefficient,
+    windowWidth,
+  ]);
 
   function copyText() {
     navigator.clipboard.writeText(`font-size: clamp${clampString};`);
@@ -291,7 +299,7 @@ const Link = styled.a`
   color: hsl(199.9deg 91.4% 36.3%);
 
   &:hover {
-    font-family: 'silkabold';
+    font-family: "silkabold";
   }
 `;
 

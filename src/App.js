@@ -254,7 +254,11 @@ const Code = styled.pre`
   background-color: hsl(180deg 10% 93%);
   font-size: 1rem;
   white-space: pre-wrap;
-  margin-bottom: 32px;
+  margin-bottom: 134.4px;
+
+  @media (max-width: 700px) {
+    margin-bottom: 32px;
+  }
 `;
 
 const CopyButton = styled.button`

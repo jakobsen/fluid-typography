@@ -23,7 +23,6 @@ function App() {
   const { width: windowWidth } = useWindowDimensions();
 
   useEffect(() => {
-    console.log(windowWidth);
     setVwCoefficient(
       oneDecimal((1600 * (maxSize - minSize)) / (maxWidth - minWidth))
     );

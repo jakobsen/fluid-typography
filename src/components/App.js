@@ -90,7 +90,7 @@ function App() {
           {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
         />
       </Wrapper>
-        <Pusher />
+      <Pusher />
       <Footer>
         <VisuallyHidden>See the source code on GitHub.</VisuallyHidden>
         <ButtonLink

@@ -35,7 +35,7 @@ export default function CodeBlock({
   }
 
   return (
-    <Code>
+    <Code remCoefficient={remCoefficient}>
       <Property>font-size:</Property> <Func>clamp</Func>
       {windowWidth > 700 ? clampString : linebreakClampString};
       <Tippy
@@ -66,7 +66,7 @@ const Code = styled.pre`
   background-color: hsl(180deg 10% 93%);
   font-size: 1rem;
   white-space: pre-wrap;
-  margin-bottom: 134.4px;
+  margin-bottom: ${p => Math.abs(p.remCoefficient) < 1 ? '32px' : '134.4px'};
 
   @media (max-width: 700px) {
     margin-bottom: 32px;

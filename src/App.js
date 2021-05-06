@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import useWindowDimensions from "./useWindowDimensions";
-import { GitHub, Clipboard, AlertCircle } from "react-feather";
+import { Clipboard, AlertCircle } from "react-feather";
+import GithubIcon from "./githubIcon";
 
 function oneDecimal(x) {
   return Math.round(10 * x) / 10;
@@ -145,7 +146,7 @@ function App() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <GitHub />
+          <GithubIcon />
         </ButtonLink>
       </Footer>
     </>

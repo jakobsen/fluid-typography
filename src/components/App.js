@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import useWindowDimensions from "./useWindowDimensions";
-import { Clipboard, AlertCircle } from "react-feather";
-import GithubIcon from "./githubIcon";
-
-function oneDecimal(x) {
-  return Math.round(10 * x) / 10;
-}
+import VisuallyHidden from "components/visuallyHidden";
+import Input from "components/customInput";
+import CodeBlock from "components/codeBlock";
+import Result from "components/result";
+import Warning from "components/warning";
+import oneDecimal from "utils/oneDecimal";
+import GithubIcon from "components/githubIcon";
 
 function App() {
   const [exampleText, setExampleText] = useState("Result (edit me!)");
@@ -18,9 +16,6 @@ function App() {
   const [maxSize, setMaxSize] = useState(3);
   const [vwCoefficient, setVwCoefficient] = useState();
   const [remCoefficient, setRemCoefficient] = useState();
-  const [clampString, setClampString] = useState("");
-  const [linebreakClampString, setLineBreakClampString] = useState("");
-  const { width: windowWidth } = useWindowDimensions();
 
   useEffect(() => {
     setVwCoefficient(
@@ -31,29 +26,7 @@ function App() {
         minSize - (minWidth * (maxSize - minSize)) / (maxWidth - minWidth)
       )
     );
-    setClampString(
-      `(${minSize}rem, ${vwCoefficient}vw ${
-        remCoefficient >= 0 ? "+" : "-"
-      } ${Math.abs(remCoefficient)}rem, ${maxSize}rem)`
-    );
-    setLineBreakClampString(
-      `(\n  ${minSize}rem,\n  ${vwCoefficient}vw ${
-        remCoefficient >= 0 ? "+" : "-"
-      } ${Math.abs(remCoefficient)}rem\n  ${maxSize}rem\n)`
-    );
-  }, [
-    maxSize,
-    minSize,
-    maxWidth,
-    minWidth,
-    vwCoefficient,
-    remCoefficient,
-    windowWidth,
-  ]);
-
-  function copyText() {
-    navigator.clipboard.writeText(`font-size: clamp${clampString};`);
-  }
+  }, [maxSize, minSize, maxWidth, minWidth, vwCoefficient, remCoefficient]);
 
   return (
     <>
@@ -99,45 +72,25 @@ function App() {
             <code>px</code>.
           </p>
         </Grid>
-        <Code>
-          <Property>font-size:</Property> <Func>clamp</Func>
-          {windowWidth > 700 ? clampString : linebreakClampString};
-          <Tippy
-            content="Copied!"
-            trigger="click"
-            onShow={(instance) => {
-              setTimeout(() => {
-                instance.hide();
-              }, 1500);
-            }}
-          >
-            <CopyButton onClick={copyText}>
-              <VisuallyHidden>Copy to clipboard</VisuallyHidden>
-              <Clipboard />
-            </CopyButton>
-          </Tippy>
-        </Code>
+        <CodeBlock
+          {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
+        ></CodeBlock>
         {Math.abs(remCoefficient) < 1 && (
           <Warning>
-            <VisuallyHidden>Warning</VisuallyHidden>
-            <WarningIcon>
-              <AlertCircle size={24} />
-            </WarningIcon>
             The number in front of the <code>rem</code> portion of the CSS rule
             should not be between -1 and 1. This makes it hard to zoom in on the
-            text (try it), which reduces accessibility for visually impaired people.
+            text (try it), which reduces accessibility for visually impaired
+            people.
           </Warning>
         )}
-        <ExampleText
-          rows={3}
+        <Result
+          lines={2}
           value={exampleText}
           onChange={(e) => setExampleText(e.target.value)}
-          style={{
-            "--computed-clamp": `clamp${clampString}`,
-          }}
+          {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
         />
       </Wrapper>
-      <Pusher />
+        <Pusher />
       <Footer>
         <VisuallyHidden>See the source code on GitHub.</VisuallyHidden>
         <ButtonLink
@@ -212,124 +165,6 @@ const Blurb = styled.p`
   max-width: 600px;
   margin: 0 auto;
   margin-bottom: 24px;
-`;
-
-const ExampleText = styled.textarea`
-  width: 100%;
-  display: block;
-  text-align: center;
-  margin: 0 auto;
-  appearance: none;
-  border: none;
-  font-size: var(--computed-clamp);
-  min-height: 0vh;
-  font-family: "silkabold";
-  font-weight: bold;
-  resize: none;
-`;
-
-const Input = styled.input`
-  font-size: 1rem;
-  width: 3.5rem;
-  text-align: center;
-  display: inline-block;
-  border: none;
-  background-color: hsl(180deg 10% 93%);
-  font-family: "silka_monoregular";
-
-  &:focus {
-    font-family: "silka_monosemibold";
-  }
-
-  font-size: clamp(1rem, x, 5rem);
-`;
-
-const Code = styled.pre`
-  position: relative;
-  display: block;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px 12px;
-  border-radius: 8px;
-  background-color: hsl(180deg 10% 93%);
-  font-size: 1rem;
-  white-space: pre-wrap;
-  margin-bottom: 134.4px;
-
-  @media (max-width: 700px) {
-    margin-bottom: 32px;
-  }
-`;
-
-const CopyButton = styled.button`
-  background: none;
-  border: none;
-  appearance: none;
-  position: absolute;
-  padding: 8px;
-  right: 4px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  color: hsl(200deg 5% 40%);
-
-  &:hover {
-    color: hsl(0deg 0% 0%);
-  }
-`;
-
-const Warning = styled.div`
-  font-size: 1.125rem;
-  border-radius: 8px;
-  border: 2px solid;
-  padding: 8px;
-  width: min(530px, 100%);
-  margin: 0 auto;
-  color: hsl(0deg 100% 40%);
-  position: relative;
-
-  & code {
-    background-color: hsl(0deg 100% 95%);
-    border-radius: 1px;
-    display: inline-block;
-    padding: 1px 5px;
-    margin: -1px -4px;
-  }
-`;
-
-const WarningIcon = styled.div`
-  position: absolute;
-  top: -14px;
-  left: -14px;
-  background-color: hsl(0deg 0% 100%);
-  width: 28px;
-  height: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-`;
-
-const VisuallyHidden = styled.span`
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-`;
-
-const Property = styled.span`
-  color: hsl(320deg 100% 35%);
-`;
-
-const Func = styled.span`
-  color: hsl(200deg 100% 30%);
 `;
 
 const Pusher = styled.div`

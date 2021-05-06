@@ -1,11 +1,19 @@
 import styled from "styled-components";
 
-export default function Result({ minSize, maxSize, vwCoefficient, remCoefficient, ...delegated}) {
+export default function Result({
+  minSize,
+  maxSize,
+  vwCoefficient,
+  remCoefficient,
+  ...delegated
+}) {
   const computedClamp = `clamp(${minSize}rem, ${vwCoefficient}vw ${
     remCoefficient >= 0 ? "+" : "-"
-  } ${Math.abs(remCoefficient)}rem, ${maxSize}rem)`
+  } ${Math.abs(remCoefficient)}rem, ${maxSize}rem)`;
 
-  return <ExampleText style={{'--computed-clamp': computedClamp}} {...delegated}/>
+  return (
+    <ExampleText style={{ "--computed-clamp": computedClamp }} {...delegated} />
+  );
 }
 
 const ExampleText = styled.textarea`
@@ -20,4 +28,8 @@ const ExampleText = styled.textarea`
   font-weight: bold;
   resize: none;
   text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;

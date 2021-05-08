@@ -5,4 +5,4 @@
 </p>
 
 Calculate the `clamp()` rule for scaling typography to your desired specifications.
-All credit for this technique goes to [Josh Comeau](joshwcomeau.com/).
+All credit for this technique goes to [Josh Comeau](https://joshwcomeau.com/).

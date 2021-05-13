@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import Tippy from "@tippyjs/react";
@@ -15,6 +15,8 @@ export default function CodeBlock({
 }) {
   const [clampString, setClampString] = useState("");
   const [linebreakClampString, setLineBreakClampString] = useState("");
+  const [tippyVisible, setTippyVisible] = useState(false);
+  const [tippyText, setTippyText] = useState("");
   const { width: windowWidth } = useWindowDimensions();
 
   useEffect(() => {
@@ -30,28 +32,33 @@ export default function CodeBlock({
     );
   }, [minSize, vwCoefficient, remCoefficient, maxSize]);
 
+  function showTippy(text) {
+    if (!tippyVisible) {
+      setTippyText(text);
+      setTippyVisible(true);
+      setTimeout(() => {
+        setTippyVisible(false);
+      }, 1500);
+    }
+  }
+
   function copyText() {
-    navigator.clipboard.writeText(`font-size: clamp${clampString};`);
+    navigator.clipboard
+      .writeText(`font-size: clamp${clampString};`)
+      .then(() => showTippy("Copied!"))
+      .catch(() => showTippy("Could not copy to clipboard :("));
   }
 
   return (
     <Code remCoefficient={remCoefficient}>
       <Property>font-size:</Property> <Func>clamp</Func>
       {windowWidth > 700 ? clampString : linebreakClampString};
-      <Tippy
-            content="Copied!"
-            trigger="click"
-            onShow={(instance) => {
-              setTimeout(() => {
-                instance.hide();
-              }, 1500);
-            }}
-          >
-            <CopyButton onClick={copyText}>
-              <VisuallyHidden>Copy to clipboard</VisuallyHidden>
-              <Clipboard />
-            </CopyButton>
-          </Tippy>
+      <Tippy content={tippyText} visible={tippyVisible}>
+        <CopyButton onClick={copyText}>
+          <VisuallyHidden>Copy to clipboard</VisuallyHidden>
+          <Clipboard />
+        </CopyButton>
+      </Tippy>
     </Code>
   );
 }
@@ -66,7 +73,8 @@ const Code = styled.pre`
   background-color: hsl(180deg 10% 93%);
   font-size: 1rem;
   white-space: pre-wrap;
-  margin-bottom: ${p => Math.abs(p.remCoefficient) < 1 ? '32px' : '134.4px'};
+  margin-bottom: ${(p) =>
+    Math.abs(p.remCoefficient) < 1 ? "32px" : "134.4px"};
 
   @media (max-width: 700px) {
     margin-bottom: 32px;

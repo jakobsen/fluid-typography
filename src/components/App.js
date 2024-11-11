@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import VisuallyHidden from "components/visuallyHidden";
 import Input from "components/customInput";
@@ -14,19 +14,13 @@ function App() {
   const [minSize, setMinSize] = useState(1.5);
   const [maxWidth, setMaxWidth] = useState(1000);
   const [maxSize, setMaxSize] = useState(3);
-  const [vwCoefficient, setVwCoefficient] = useState();
-  const [remCoefficient, setRemCoefficient] = useState();
 
-  useEffect(() => {
-    setVwCoefficient(
-      oneDecimal((1600 * (maxSize - minSize)) / (maxWidth - minWidth))
-    );
-    setRemCoefficient(
-      oneDecimal(
-        minSize - (minWidth * (maxSize - minSize)) / (maxWidth - minWidth)
-      )
-    );
-  }, [maxSize, minSize, maxWidth, minWidth, vwCoefficient, remCoefficient]);
+  const vwCoefficient = oneDecimal(
+    (1600 * (maxSize - minSize)) / (maxWidth - minWidth),
+  );
+  const remCoefficient = oneDecimal(
+    minSize - (minWidth * (maxSize - minSize)) / (maxWidth - minWidth),
+  );
 
   return (
     <>
